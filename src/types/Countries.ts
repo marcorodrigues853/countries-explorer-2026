@@ -1,4 +1,4 @@
-import type { ICountryPortugal } from './country'
+import type { ICountry } from './country'
 import type { ICountries } from './types'
 
 const countries: ICountries = [
@@ -198,7 +198,7 @@ const countries: ICountries = [
 
 console.log(countries)
 
-const country: ICountryPortugal = {
+const country: ICountry = {
   name: {
     common: 'Portugal',
     official: 'Portuguese Republic',
