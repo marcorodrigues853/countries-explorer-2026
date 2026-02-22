@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ICountry } from "../types/types";
 import CountryCard from "./CountryCard";
+import { Link } from "react-router";
 
 function CountriesPage() {
   const [countries, setCountries] = useState<ICountry[]>([]);
@@ -28,6 +29,7 @@ function CountriesPage() {
         return (
           <div>
             <CountryCard country={country} />
+            <Link to={country.name.common}>ver mais</Link>
           </div>
         );
       })}
