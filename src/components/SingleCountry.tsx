@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ICountry } from "../types/country";
-import { useParams } from "react-router";
 
 function SingleCountry() {
-  let params = useParams();
-  console.log("params", params);
   const [countriesList, setCountriesLists] = useState<ICountry[]>([]);
   const [country, setCountry] = useState<ICountry>();
   const [selectedCountry, setSelectedCountry] = useState("es");

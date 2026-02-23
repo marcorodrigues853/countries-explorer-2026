@@ -18,13 +18,7 @@ function CountriesPage() {
     fetchCountries();
   }, []);
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2,1fr)",
-        gap: "12px",
-      }}
-    >
+    <div className="grid">
       {countries.map((country) => {
         return (
           <div>

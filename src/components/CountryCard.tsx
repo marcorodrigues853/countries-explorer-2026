@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import type { ICountry } from "../types/types";
 
 import "./countryCard.css";
