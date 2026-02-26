@@ -1,10 +1,14 @@
-import { Link } from "react-router";
+import { Link, useLocation, useParams } from "react-router";
 import "./navbar.css";
 import Button from "../Button/Button";
 import WorldIcon from "../Icons/WorldIcon/WorldIcon";
 import MapPin from "../Icons/MapPin/MapPin";
 import CurrenciesIcon from "../Icons/CurrenciesIcon/CurrenciesIcon";
 function NavBar() {
+  const location = useLocation();
+
+  const activeMenu = location.pathname.split("/")[1];
+  console.log("activeMenu", activeMenu);
   return (
     <nav>
       <div className="logo">
@@ -14,7 +18,7 @@ function NavBar() {
       <ul className="menu">
         <li>
           <Link to="countries">
-            <Button variant="primary">
+            <Button variant="primary" isActive={activeMenu === "countries"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -35,18 +39,20 @@ function NavBar() {
           </Link>
         </li>
         <li>
-          <Link to="countries">
-            <Button variant="primary">
-              <MapPin />
+          <Link to="/regions">
+            <Button variant="primary" isActive={activeMenu === "regions"}>
+              <MapPin size={20} />
               <span>Regions</span>
             </Button>
           </Link>
         </li>
         <li>
-          <Button variant="primary">
-            <CurrenciesIcon />
-            <span>Currencies</span>
-          </Button>
+          <Link to="currencies">
+            <Button variant="primary" isActive={activeMenu === "currencies"}>
+              <CurrenciesIcon />
+              <span>Currencies</span>
+            </Button>
+          </Link>
         </li>
       </ul>
     </nav>

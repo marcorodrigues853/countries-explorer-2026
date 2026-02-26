@@ -3,12 +3,30 @@ button {
   background: none;
   display: flex;
   gap: 4px;
+  border-radius: 3px;
+  padding: 4px 8px;
 }
 
 .primary {
   background-color: white;
-  padding: 4px 8px;
+}
+.primary:hover {
+  background-color: #9999;
+}
+.primary.active {
+  background-color: #18181b;
+  color: white;
 }
 
 .secondary {
+  background-color: black;
+  color: white;
+}
+.secondary:hover {
+  background-color: blue;
+  color: white;
+}
+
+.secondary.active {
+  background-color: green;
 }

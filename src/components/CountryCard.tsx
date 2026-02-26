@@ -1,4 +1,5 @@
 import type { ICountry } from "../types/types";
+import Card from "./Card/Card";
 
 import "./countryCard.css";
 interface ICountryCard {
@@ -6,7 +7,7 @@ interface ICountryCard {
 }
 function CountryCard({ country }: ICountryCard) {
   return (
-    <div className="card">
+    <Card> 
       <img src={country.flags.png} alt={country.name.common} />
       <h1>
         <strong>{country.name.common}</strong>
@@ -17,7 +18,7 @@ function CountryCard({ country }: ICountryCard) {
         <span>Capital: {country.capital}</span>
         <span>Population: {country.population}</span>
       </div>
-    </div>
+    </Card>
   );
 }
 

@@ -97,3 +97,9 @@ a {
   grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
   gap: 16px;
 }
+#root {
+  width: 100vw;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}

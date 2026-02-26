@@ -7,12 +7,10 @@ function CountryPage() {
   // get name of country from URL
   const { name } = useParams();
 
-  console.log("params", name);
 
   // fetch dinâmico utilizando o param do URL
 
   const [country, setCountry] = useState<ICountry>();
-  console.log("country____zzzz", country);
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -21,7 +19,7 @@ function CountryPage() {
       );
 
       const newCountry = await response.json();
-      console.log("newCountry", newCountry);
+
       setCountry(newCountry[0]);
     };
 
