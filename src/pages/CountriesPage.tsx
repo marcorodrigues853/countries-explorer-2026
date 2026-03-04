@@ -7,6 +7,16 @@ import "./countriesPage.css";
 function CountriesPage() {
   const [countries, setCountries] = useState<ICountry[]>([]);
   const [search, setSearch] = useState<string>("");
+  const [selectedContinent, setSelectedContinent] = useState("");
+  const [selectedRegion, setSelectedregion] = useState("");
+  const [selectedCurrency, setSelectedCurrency] = useState("");
+
+  console.log(
+    "filters____",
+    selectedContinent,
+    selectedRegion,
+    selectedCurrency,
+  );
 
   const regions = countries.map((country) => {
     return country.region;
@@ -16,24 +26,36 @@ function CountriesPage() {
   const continents = countries.flatMap((country) => country.continents);
   const uniqueContinents = [...new Set(continents)];
 
-  const results = countries.reduce(
-    (acc, currentCountry) => {
-      // currentCountry.subregion
+  const currencies = countries.flatMap((country) => {
+    const hasCurrencies = !!country.currencies;
+    const keysOfCurrencies = hasCurrencies
+      ? Object.keys(country.currencies)
+      : [];
+    return keysOfCurrencies;
+  });
 
-      if (currentCountry.subregion) {
-        acc.subRegions[currentCountry.subregion] = currentCountry.subregion;
-      }
+  const uniqueCurrencies = [...new Set(currencies)];
 
-      const keysOfCurrencies = Object.keys(currentCountry.currencies);
-      keysOfCurrencies.forEach((key) => (acc.currencies[key] = key));
+  console.log("uniqueCurrencies____", uniqueCurrencies);
 
-      // necessito retornar sempre o acumulador
-      return acc;
-    },
-    { currencies: {}, continents: [], regions: [], subRegions: {} },
-  );
+  // const results = countries.reduce(
+  //   (acc, currentCountry) => {
+  //     // currentCountry.subregion
 
-  console.log("results", results);
+  //     if (currentCountry.subregion) {
+  //       acc.subRegions[currentCountry.subregion] = currentCountry.subregion;
+  //     }
+
+  //     const keysOfCurrencies = Object.keys(currentCountry.currencies);
+  //     keysOfCurrencies.forEach((key) => (acc.currencies[key] = key));
+
+  //     // necessito retornar sempre o acumulador
+  //     return acc;
+  //   },
+  //   { currencies: {}, continents: [], regions: [], subRegions: {} },
+  // );
+
+  // console.log("results", results);
 
   const filteredCountries = countries.filter((country) => {
     const searchLowerCase = search.toLowerCase();
@@ -46,7 +68,22 @@ function CountriesPage() {
 
     const hasCapitalInSearch = capitalLowerCase.includes(searchLowerCase);
 
-    return hasNameInSearch || hasCapitalInSearch;
+    const matchContinentWithSelected =
+      country.continents.includes(selectedContinent) || !selectedContinent;
+
+    const matchRegionWithSelected =
+      country.region.includes(selectedRegion) || !selectedRegion;
+
+    const hasMatchWithCurrency =
+      Object.keys(country.currencies).includes(selectedCurrency) ||
+      !selectedCurrency;
+
+    return (
+      (hasNameInSearch || hasCapitalInSearch) &&
+      matchContinentWithSelected &&
+      matchRegionWithSelected &&
+      hasMatchWithCurrency
+    );
   });
 
   console.log("filteredCountries", filteredCountries);
@@ -75,45 +112,105 @@ function CountriesPage() {
       />
 
       <div className="filters">
-        <select name="regions" id="regions">
-          {uniqueRegions.map((region) => {
-            return <option value="">{region}</option>;
-          })}
-        </select>
-        <select name="continents" id="continents">
-          {uniqueContinents.map((continent) => (
-            <option value="">{continent}</option>
-          ))}
-        </select>
-        <select name="currencies" id="currencies">
-          {Object.keys(results.currencies).map((currency) => (
-            <option value="">{currency}</option>
-          ))}
-        </select>
-        <select name="sub-regions" id="sub-regions">
+        <div>
+          <label>regions</label>
+
+          <select
+            name="regions"
+            id="regions"
+            onChange={(event) => setSelectedregion(event.target.value)}
+          >
+            <option value="">------</option>
+            {uniqueRegions.map((region) => {
+              return (
+                <option value={region} key={region}>
+                  {region}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div>
+          <label>Continents</label>
+          <select
+            name="continents"
+            id="continents"
+            onChange={(event) => setSelectedContinent(event.target.value)}
+          >
+            <option value="" selected={!!selectedContinent}>
+              ------
+            </option>
+            {uniqueContinents.map((continent) => (
+              <option
+                value={continent}
+                key={continent}
+                selected={!!selectedContinent}
+              >
+                {continent}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label>Currencies</label>
+
+          <select
+            name="currencies"
+            id="currencies"
+            onChange={(event) => setSelectedCurrency(event.target.value)}
+          >
+            <option value="">------</option>
+            {uniqueCurrencies.map((currency) => (
+              <option value={currency} key={currency}>
+                {currency}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button
+          onClick={() => {
+            setSelectedContinent("");
+            setSelectedCurrency("");
+            setSelectedregion("");
+          }}
+        >
+          clear
+        </button>
+        {/* <select name="sub-regions" id="sub-regions">
           {Object.keys(results.subRegions).map((subRegion) => (
             <option value="">{subRegion}</option>
           ))}
-        </select>
+        </select> */}
       </div>
 
       <div className="grid">
+        {filteredCountries.map((country) => {
+          return (
+            <Link to={country.name.common} key={country.cca2}>
+              <CountryCard country={country} />
+            </Link>
+          );
+        })}
+        {/* 
         {search &&
           filteredCountries.map((country) => {
             return (
-              <Link to={country.name.common}>
+              <Link to={country.name.common} key={country.cca2}>
                 <CountryCard country={country} />
               </Link>
             );
-          })}
-        {!search &&
+          })} 
+           */}
+
+        {/* {!search &&
           countries.map((country) => {
             return (
-              <Link to={country.name.common}>
+              <Link to={country.name.common} key={country.cca2}>
                 <CountryCard country={country} />
               </Link>
             );
-          })}
+          })} */}
       </div>
     </div>
   );
