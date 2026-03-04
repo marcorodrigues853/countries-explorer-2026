@@ -11,12 +11,17 @@ function CountriesPage() {
   const [selectedRegion, setSelectedregion] = useState("");
   const [selectedCurrency, setSelectedCurrency] = useState("");
 
-  console.log(
-    "filters____",
-    selectedContinent,
-    selectedRegion,
-    selectedCurrency,
-  );
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const response = await fetch(
+        "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,population,continents,currencies,subregion",
+      );
+      const newCountries = await response.json();
+      setCountries(newCountries);
+    };
+
+    fetchCountries();
+  }, []);
 
   const regions = countries.map((country) => {
     return country.region;
@@ -86,20 +91,6 @@ function CountriesPage() {
     );
   });
 
-  console.log("filteredCountries", filteredCountries);
-
-  useEffect(() => {
-    const fetchCountries = async () => {
-      const response = await fetch(
-        "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,population,continents,currencies,subregion",
-      );
-      const newCountries = await response.json();
-      setCountries(newCountries);
-    };
-
-    fetchCountries();
-  }, []);
-
   return (
     <div>
       <label>search: </label>
@@ -137,14 +128,14 @@ function CountriesPage() {
             id="continents"
             onChange={(event) => setSelectedContinent(event.target.value)}
           >
-            <option value="" selected={!!selectedContinent}>
+            <option value="" selected={selectedContinent === ""}>
               ------
             </option>
             {uniqueContinents.map((continent) => (
               <option
                 value={continent}
                 key={continent}
-                selected={!!selectedContinent}
+                selected={selectedContinent === continent}
               >
                 {continent}
               </option>
@@ -154,7 +145,6 @@ function CountriesPage() {
 
         <div>
           <label>Currencies</label>
-
           <select
             name="currencies"
             id="currencies"
