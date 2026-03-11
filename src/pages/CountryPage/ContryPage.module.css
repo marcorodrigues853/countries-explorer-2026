@@ -1,0 +1,39 @@
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.country {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chips-container {
+  display: flex;
+  gap: 16px;
+}
+
+#section-detail {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  gap: 16px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.actions {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}

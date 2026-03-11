@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 
 import CurrenciesPage from "./pages/CurrenciesPage.tsx";
 import CountriesPage from "./pages/CountriesPage.tsx";
-import CountryPage from "./pages/CountryPage.tsx";
+import CountryPage from "./pages/CountryPage/CountryPage.tsx";
 import NavBar from "./components/NavBar/NavBar.tsx";
 import Homepage from "./pages/Homerpage.tsx";
 

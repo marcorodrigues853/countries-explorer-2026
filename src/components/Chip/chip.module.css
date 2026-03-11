@@ -1,0 +1,21 @@
+.chip {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  border: 1px solid transparent;
+}
+.primary {
+  background-color: black;
+  color: white;
+}
+.secondary {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.terciary {
+  background-color: white;
+  color: black;
+  border-color: #3333336e;
+}

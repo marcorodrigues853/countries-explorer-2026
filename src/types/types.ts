@@ -18,7 +18,7 @@ export interface ICountry {
   continents: string[];
 }
 
-interface ILanguages {
+export interface ILanguages {
   [key: string]: string;
 }
 

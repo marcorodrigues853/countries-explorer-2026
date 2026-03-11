@@ -26,6 +26,7 @@ function CountriesPage() {
   const regions = countries.map((country) => {
     return country.region;
   });
+
   const uniqueRegions = [...new Set(regions)];
 
   const continents = countries.flatMap((country) => country.continents);
@@ -73,6 +74,7 @@ function CountriesPage() {
 
     const hasCapitalInSearch = capitalLowerCase.includes(searchLowerCase);
 
+    // novo
     const matchContinentWithSelected =
       country.continents.includes(selectedContinent) || !selectedContinent;
 
@@ -84,7 +86,8 @@ function CountriesPage() {
       !selectedCurrency;
 
     return (
-      (hasNameInSearch || hasCapitalInSearch) &&
+      (hasNameInSearch || hasCapitalInSearch)
+      &&
       matchContinentWithSelected &&
       matchRegionWithSelected &&
       hasMatchWithCurrency
