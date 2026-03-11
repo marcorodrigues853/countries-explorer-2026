@@ -9,6 +9,7 @@ import type { ICountry } from "../../types/country";
 import SectionDetail from "../../components/SectionDetail/SectionDetail";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
+import BordersList from "../../components/BordersList/BordersList";
 
 function CountryPage() {
   // get name of country from URL
@@ -35,7 +36,7 @@ function CountryPage() {
   return (
     country && (
       <>
-        <section className={styles.info}>
+        <section id="section-info" className={styles.info}>
           <div className={styles["country"]}>
             <span>
               <strong>{country?.name.common}</strong>
@@ -79,14 +80,15 @@ function CountryPage() {
             </Card>
 
             <Card>
-              <span>Border Countries</span>
+              {/* <span>Border Countries</span>
               <div className={styles["border-countries"]}>
-                {country.borders.map((border) => (
+                {country.borders?.map((border) => (
                   <Link to={`/countries/portugal`} key={border}>
                     <Button variant="primary">{border}</Button>
                   </Link>
                 ))}
-              </div>
+              </div> */}
+              <BordersList borderCountryCodes={country.borders} />
             </Card>
 
             <Card>

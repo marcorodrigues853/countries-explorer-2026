@@ -1,4 +1,5 @@
 import type { ICountry } from "../types/types";
+
 import Card from "./Card/Card";
 
 import "./countryCard.css";
@@ -7,7 +8,7 @@ interface ICountryCard {
 }
 function CountryCard({ country }: ICountryCard) {
   return (
-    <Card> 
+    <Card>
       <img src={country.flags.png} alt={country.name.common} />
       <h1>
         <strong>{country.name.common}</strong>
