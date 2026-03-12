@@ -4,6 +4,7 @@ import Card from "../Card/Card";
 import Button from "../Button/Button";
 import { Link } from "react-router";
 
+// por | mar |spa
 type CountryCodes = { borderCountryCodes: ICountry["borders"] };
 
 // POR MAR
@@ -24,6 +25,7 @@ function BordersList({ borderCountryCodes }: CountryCodes) {
 
       const newCountries = await response.json();
 
+      
       setCountries(newCountries);
     };
     fetchCountriesByBorderCountryCodes();

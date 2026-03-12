@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import type { ICountry } from "../types/types";
 import CountryCard from "../components/CountryCard";
 import { Link } from "react-router";
 import "./countriesPage.css";
+import { UserContext } from "../context/UserContext";
 
 function CountriesPage() {
   const [countries, setCountries] = useState<ICountry[]>([]);
@@ -10,6 +11,10 @@ function CountriesPage() {
   const [selectedContinent, setSelectedContinent] = useState("");
   const [selectedRegion, setSelectedregion] = useState("");
   const [selectedCurrency, setSelectedCurrency] = useState("");
+
+  const user = useContext(UserContext);
+
+  console.log("user inside Countries", user);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -86,8 +91,7 @@ function CountriesPage() {
       !selectedCurrency;
 
     return (
-      (hasNameInSearch || hasCapitalInSearch)
-      &&
+      (hasNameInSearch || hasCapitalInSearch) &&
       matchContinentWithSelected &&
       matchRegionWithSelected &&
       hasMatchWithCurrency

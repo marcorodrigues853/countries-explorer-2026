@@ -1,20 +1,51 @@
-import { Link, useLocation, useParams } from "react-router";
+import { Link, useLocation } from "react-router";
 import "./navbar.css";
 import Button from "../Button/Button";
 import WorldIcon from "../Icons/WorldIcon/WorldIcon";
-import MapPin from "../Icons/MapPin/MapPin";
 import CurrenciesIcon from "../Icons/CurrenciesIcon/CurrenciesIcon";
+import UserInfo from "./UserInfo";
+
+import MapPin from "../Icons/MapPin/MapPin";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+
 function NavBar() {
   const location = useLocation();
+  const { user, setUser, changeUser } = useContext(UserContext);
+  console.log("user Context", user, setUser, changeUserInside);
 
   const activeMenu = location.pathname.split("/")[1];
   console.log("activeMenu", activeMenu);
+
+  function changeUserInside() {
+    setUser({
+      name: "CARLA",
+      photo: "https://via.placeholder.com/40",
+      country: "FRança",
+      currency: `${Math.random().toFixed(2)} USD`,
+    });
+  }
   return (
     <nav>
       <div className="logo">
         <WorldIcon />
         <span>WORD EXPLORER</span>
       </div>
+      <UserInfo user={user} />
+      <button
+        onClick={() => {
+          changeUserInside();
+        }}
+      >
+        MUDAR USER PARA CARLA
+      </button>
+      <button
+        onClick={() => {
+          changeUser();
+        }}
+      >
+        MUDAR USER PARA 22222
+      </button>
       <ul className="menu">
         <li>
           <Link to="countries">

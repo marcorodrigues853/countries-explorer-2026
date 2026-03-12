@@ -50,7 +50,7 @@ type Map = {
   openStreetMaps: string;
 };
 
-interface IName {
+export interface IName {
   common: string;
   official: string;
   nativeName: {
